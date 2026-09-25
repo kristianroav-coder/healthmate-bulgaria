@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRegistryRouteImport } from './routes/_authenticated/registry'
+import { Route as AuthenticatedSchoolNotesRouteImport } from './routes/_authenticated/school-notes'
 import { Route as AuthenticatedStaffRouteImport } from './routes/_authenticated/staff'
 import { Route as AuthenticatedPatientsNewRouteImport } from './routes/_authenticated/patients.new'
 import { Route as AuthenticatedPatientsIdVisitRouteImport } from './routes/_authenticated/patients.$id.visit'
@@ -36,6 +37,12 @@ const AuthenticatedRegistryRoute = AuthenticatedRegistryRouteImport.update({
   path: '/registry',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedSchoolNotesRoute =
+  AuthenticatedSchoolNotesRouteImport.update({
+    id: '/school-notes',
+    path: '/school-notes',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedStaffRoute = AuthenticatedStaffRouteImport.update({
   id: '/staff',
   path: '/staff',
@@ -58,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/registry': typeof AuthenticatedRegistryRoute
+  '/school-notes': typeof AuthenticatedSchoolNotesRoute
   '/staff': typeof AuthenticatedStaffRoute
   '/patients/new': typeof AuthenticatedPatientsNewRoute
   '/patients/$id/visit': typeof AuthenticatedPatientsIdVisitRoute
@@ -66,6 +74,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/registry': typeof AuthenticatedRegistryRoute
+  '/school-notes': typeof AuthenticatedSchoolNotesRoute
   '/staff': typeof AuthenticatedStaffRoute
   '/patients/new': typeof AuthenticatedPatientsNewRoute
   '/patients/$id/visit': typeof AuthenticatedPatientsIdVisitRoute
@@ -76,6 +85,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/registry': typeof AuthenticatedRegistryRoute
+  '/_authenticated/school-notes': typeof AuthenticatedSchoolNotesRoute
   '/_authenticated/staff': typeof AuthenticatedStaffRoute
   '/_authenticated/patients/new': typeof AuthenticatedPatientsNewRoute
   '/_authenticated/patients/$id/visit': typeof AuthenticatedPatientsIdVisitRoute
@@ -86,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/registry'
+    | '/school-notes'
     | '/staff'
     | '/patients/new'
     | '/patients/$id/visit'
@@ -94,6 +105,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/registry'
+    | '/school-notes'
     | '/staff'
     | '/patients/new'
     | '/patients/$id/visit'
@@ -103,6 +115,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/_authenticated/registry'
+    | '/_authenticated/school-notes'
     | '/_authenticated/staff'
     | '/_authenticated/patients/new'
     | '/_authenticated/patients/$id/visit'
@@ -144,6 +157,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRegistryRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/school-notes': {
+      id: '/_authenticated/school-notes'
+      path: '/school-notes'
+      fullPath: '/school-notes'
+      preLoaderRoute: typeof AuthenticatedSchoolNotesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/staff': {
       id: '/_authenticated/staff'
       path: '/staff'
@@ -170,6 +190,7 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedRegistryRoute: typeof AuthenticatedRegistryRoute
+  AuthenticatedSchoolNotesRoute: typeof AuthenticatedSchoolNotesRoute
   AuthenticatedStaffRoute: typeof AuthenticatedStaffRoute
   AuthenticatedPatientsNewRoute: typeof AuthenticatedPatientsNewRoute
   AuthenticatedPatientsIdVisitRoute: typeof AuthenticatedPatientsIdVisitRoute
@@ -177,6 +198,7 @@ interface AuthenticatedRouteRouteChildren {
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedRegistryRoute: AuthenticatedRegistryRoute,
+  AuthenticatedSchoolNotesRoute: AuthenticatedSchoolNotesRoute,
   AuthenticatedStaffRoute: AuthenticatedStaffRoute,
   AuthenticatedPatientsNewRoute: AuthenticatedPatientsNewRoute,
   AuthenticatedPatientsIdVisitRoute: AuthenticatedPatientsIdVisitRoute,
