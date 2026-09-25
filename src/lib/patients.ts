@@ -38,9 +38,9 @@ export interface Patient {
   insurer: string;
   insured: boolean;
   isStudent: boolean;
-  schoolName?: string;
-  schoolLocation?: string;
-  grade?: string;
+  schoolName?: string | undefined;
+  schoolLocation?: string | undefined;
+  grade?: string | undefined;
   gp: string;
   visits: Visit[];
   lastVisit: Visit;
