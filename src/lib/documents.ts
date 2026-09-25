@@ -7,11 +7,11 @@ import {
 } from "./patients";
 
 export const HOSPITAL = {
-  name: "НАЦИОНАЛНА МНОГОПРОФИЛНА ТРАНСПОРТНА БОЛНИЦА",
-  name2: "„Цар Борис III“ — София",
-  address: "гр. София 1233, бул. „Мария Луиза“ №104-106",
-  contacts: "тел. 02/ 932 42 00 • регистратура 02/ 932 42 22 • info@mtc.government.bg",
-  registry: "РЗИ рег. № 2201234567 • НЗОК договор № 22-0456",
+  name: "МНОГОПРОФИЛНА БОЛНИЦА ЗА АКТИВНО ЛЕЧЕНИЕ",
+  name2: "„МБАЛ – Балчик“ ЕООД",
+  address: "гр. Балчик 9600, ул. „Д-р Желязко Желязков“ №2",
+  contacts: "тел. 0579/ 7 20 50 • регистратура 0579/ 7 20 51 • office@mbal-balchik.bg",
+  registry: "РЗИ Добрич рег. № 0802211001 • НЗОК договор № 08-0112",
 };
 
 export interface DocField {
@@ -192,6 +192,7 @@ export function buildDocument(patient: Patient, kind: DocumentKind): HospitalDoc
           { label: "Дата на посещението", value: formatDateBg(v.date) },
           { label: "Отделение", value: v.department },
           { label: "Лекар", value: v.doctor },
+          { label: "Оплаквания / анамнеза", value: v.complaints || "—" },
           { label: "Диагноза", value: v.diagnosis },
           { label: "Код по МКБ-10", value: v.icd },
         ],
@@ -201,6 +202,7 @@ export function buildDocument(patient: Patient, kind: DocumentKind): HospitalDoc
         heading: "Терапия и препоръки",
         body: [
           v.notes,
+          ...(v.finalNotes ? [`Заключение: ${v.finalNotes}`] : []),
           "Контролен преглед при влошаване на състоянието или по преценка на лекуващия лекар.",
         ],
       },

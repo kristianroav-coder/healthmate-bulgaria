@@ -17,10 +17,13 @@ export interface Visit {
   pulse: number;
   temperature: number;
   notes: string;
+  complaints?: string;
+  finalNotes?: string;
 }
 
 export interface Patient {
   id: string;
+  dbId?: string;
   egn: string;
   firstName: string;
   middleName: string;
