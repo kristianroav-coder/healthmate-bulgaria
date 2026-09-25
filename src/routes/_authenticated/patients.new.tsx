@@ -56,7 +56,7 @@ function NewPatient() {
   async function save(e: React.FormEvent) {
     e.preventDefault();
     const parsed = schema.safeParse(f);
-    if (!parsed.success || !info) return toast.error(parsed.error?.issues[0]?.message ?? "Невалидно ЕГН");
+    if (!parsed.success || !info) { toast.error(parsed.error?.issues[0]?.message ?? "Невалидно ЕГН"); return; }
     setBusy(true);
     const d = parsed.data;
     const { data, error } = await supabase.from("patients").insert({
@@ -65,7 +65,7 @@ function NewPatient() {
       grade: student ? d.grade : null,
     }).select("id").single();
     setBusy(false);
-    if (error) return toast.error(error.code === "23505" ? "Пациент с това ЕГН вече съществува" : error.message);
+    if (error) { toast.error(error.code === "23505" ? "Пациент с това ЕГН вече съществува" : error.message); return; }
     await qc.invalidateQueries({ queryKey: ["patients"] });
     toast.success("Пациентът е регистриран");
     navigate({ to: "/patients/$id/visit", params: { id: data.id } });

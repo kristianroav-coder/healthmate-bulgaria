@@ -81,11 +81,11 @@ function VisitPage() {
       ...f, doctor, weight_kg: Number(f.weight_kg), height_cm: Number(f.height_cm),
       pulse: Number(f.pulse), temperature: Number(f.temperature.replace(",", ".")),
     });
-    if (!parsed.success) return toast.error(parsed.error.issues[0]?.message ?? "Невалидни данни");
+    if (!parsed.success) { toast.error(parsed.error.issues[0]?.message ?? "Невалидни данни"); return; }
     setBusy(true);
-    const { error } = await supabase.from("visits").insert({ ...parsed.data, patient_id: id, created_by: me?.id });
+    const { error } = await supabase.from("visits").insert({ ...parsed.data, patient_id: id, created_by: me?.id ?? null });
     setBusy(false);
-    if (error) return toast.error("Грешка при запис: " + error.message);
+    if (error) { toast.error("Грешка при запис: " + error.message); return; }
     await qc.invalidateQueries({ queryKey: ["patients"] });
     toast.success("Прегледът е записан");
     navigate({ to: "/registry" });
