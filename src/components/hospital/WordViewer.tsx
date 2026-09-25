@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Download, Loader2, Printer, X, FileText, Save, Search } from "lucide-react";
-import logoUrl from "@/assets/logo-nmtb.png";
+import logoAsset from "@/assets/logo-nmtb-new.png.asset.json";
+const logoUrl = logoAsset.url;
 import { DocumentPage } from "./DocumentPage";
 import { downloadDocx } from "@/lib/docx-export";
 import { DOCUMENT_LABELS, type HospitalDocument, type DocumentKind } from "@/lib/documents";

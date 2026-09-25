@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Search, Users, GraduationCap, CalendarClock, ShieldAlert, X } from "lucide-react";
-import logo from "@/assets/logo-nmtb.png";
+import logoAsset from "@/assets/logo-nmtb-new.png.asset.json";
+const logo = logoAsset.url;
 import { PATIENTS, REGISTRY_STATS, searchPatients, formatDateBg, type Patient } from "@/lib/patients";
 import { buildDocument, DOCUMENT_LABELS, type DocumentKind } from "@/lib/documents";
 import { PatientDetail } from "@/components/hospital/PatientDetail";
