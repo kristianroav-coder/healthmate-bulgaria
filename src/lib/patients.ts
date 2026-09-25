@@ -175,7 +175,7 @@ export function buildEgn(birth: Date, order: number): string {
   const dd = String(birth.getDate()).padStart(2, "0");
   const ooo = String(order).padStart(3, "0");
   const base = `${yy}${mm}${dd}${ooo}`;
-  const sum = base.split("").reduce((acc, d, i) => acc + Number(d) * EGN_WEIGHTS[i], 0);
+  const sum = base.split("").reduce((acc, d, i) => acc + Number(d) * (EGN_WEIGHTS[i] ?? 0), 0);
   const check = sum % 11 === 10 ? 0 : sum % 11;
   return `${base}${check}`;
 }
@@ -185,7 +185,7 @@ export function isValidEgn(egn: string): boolean {
   const sum = egn
     .slice(0, 9)
     .split("")
-    .reduce((acc, d, i) => acc + Number(d) * EGN_WEIGHTS[i], 0);
+    .reduce((acc, d, i) => acc + Number(d) * (EGN_WEIGHTS[i] ?? 0), 0);
   const check = sum % 11 === 10 ? 0 : sum % 11;
   return check === Number(egn[9]);
 }
@@ -194,7 +194,7 @@ export function isValidEgn(egn: string): boolean {
 /* helpers                                                             */
 /* ------------------------------------------------------------------ */
 
-const pick = <T,>(rnd: () => number, arr: T[]): T => arr[Math.floor(rnd() * arr.length)];
+const pick = <T,>(rnd: () => number, arr: T[]): T => arr[Math.floor(rnd() * arr.length)] as T;
 const between = (rnd: () => number, min: number, max: number) => min + Math.floor(rnd() * (max - min + 1));
 const iso = (d: Date) => d.toISOString().slice(0, 10);
 
@@ -324,7 +324,7 @@ function makePatient(rnd: () => number, index: number): Patient {
     grade,
     gp: pick(rnd, DOCTORS),
     visits,
-    lastVisit: visits[0],
+    lastVisit: visits[0] as Visit,
   };
 }
 

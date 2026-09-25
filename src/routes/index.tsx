@@ -46,12 +46,12 @@ function StatCard({ icon: Icon, label, value }: { icon: typeof Users; label: str
 
 function Index() {
   const [query, setQuery] = useState("");
-  const [selectedId, setSelectedId] = useState<string>(PATIENTS[0].id);
+  const [selectedId, setSelectedId] = useState<string>(PATIENTS[0]!.id);
   const [docKind, setDocKind] = useState<DocumentKind | null>(null);
 
   const results = useMemo(() => searchPatients(query), [query]);
   const selected: Patient = useMemo(
-    () => PATIENTS.find((p) => p.id === selectedId) ?? results[0] ?? PATIENTS[0],
+    () => PATIENTS.find((p) => p.id === selectedId) ?? results[0] ?? PATIENTS[0]!,
     [selectedId, results],
   );
 
