@@ -25,19 +25,19 @@ export const Route = createFileRoute("/_authenticated/patients/new")({
 });
 
 const schema = z.object({
-  first_name: z.string().trim().min(2, "Въведете име").max(50),
-  middle_name: z.string().trim().max(50),
-  last_name: z.string().trim().min(2, "Въведете фамилия").max(50),
+  first_name: z.string().trim().min(2, "Въведете име").max(300),
+  middle_name: z.string().trim().max(300),
+  last_name: z.string().trim().min(2, "Въведете фамилия").max(300),
   egn: z.string().refine(isValidEgn, "Невалидно ЕГН"),
-  phone: z.string().trim().max(30),
-  city: z.string().trim().min(2).max(60),
-  address: z.string().trim().max(200),
+  phone: z.string().trim().max(300),
+  city: z.string().trim().min(2).max(300),
+  address: z.string().trim().max(2000),
   blood_type: z.string().max(10),
-  allergies: z.string().trim().max(200),
-  gp: z.string().trim().max(100),
-  school_name: z.string().trim().max(150),
-  school_location: z.string().trim().max(150),
-  grade: z.string().trim().max(50),
+  allergies: z.string().trim().max(2000),
+  gp: z.string().trim().max(300),
+  school_name: z.string().trim().max(500),
+  school_location: z.string().trim().max(500),
+  grade: z.string().trim().max(300),
 });
 
 function NewPatient() {
