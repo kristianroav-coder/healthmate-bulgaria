@@ -9,8 +9,8 @@ import { toast } from "sonner";
 
 interface Props {
   doc: HospitalDocument;
-  kind: DocumentKind;
-  onKindChange: (kind: DocumentKind) => void;
+  kind?: DocumentKind;
+  onKindChange?: (kind: DocumentKind) => void;
   onClose: () => void;
 }
 
@@ -82,6 +82,7 @@ export function WordViewer({ doc, kind, onKindChange, onClose }: Props) {
           {busy ? <Loader2 className="size-4 animate-spin" /> : <Download className="size-4" />} Изтегли .docx
         </button>
         <span className="mx-1 h-6 w-px bg-border" />
+        {kind && onKindChange && (
         <div className="inline-flex items-center gap-2 text-sm">
           <Save className="size-4 text-muted-foreground" />
           <select
@@ -96,6 +97,7 @@ export function WordViewer({ doc, kind, onKindChange, onClose }: Props) {
             ))}
           </select>
         </div>
+        )}
         <div className="ml-auto flex items-center gap-2 text-sm text-muted-foreground">
           <Search className="size-4" />
           <input

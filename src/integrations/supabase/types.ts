@@ -113,6 +113,71 @@ export type Database = {
         }
         Relationships: []
       }
+      school_notes: {
+        Row: {
+          allergies: string
+          conclusion: string
+          created_at: string
+          created_by: string | null
+          diseases: string
+          doctor: string
+          grade: string
+          height_cm: number | null
+          id: string
+          note_date: string
+          patient_id: string
+          pe_group: string
+          school_location: string
+          school_name: string
+          vaccinations: string
+          weight_kg: number | null
+        }
+        Insert: {
+          allergies?: string
+          conclusion?: string
+          created_at?: string
+          created_by?: string | null
+          diseases?: string
+          doctor?: string
+          grade?: string
+          height_cm?: number | null
+          id?: string
+          note_date?: string
+          patient_id: string
+          pe_group?: string
+          school_location?: string
+          school_name?: string
+          vaccinations?: string
+          weight_kg?: number | null
+        }
+        Update: {
+          allergies?: string
+          conclusion?: string
+          created_at?: string
+          created_by?: string | null
+          diseases?: string
+          doctor?: string
+          grade?: string
+          height_cm?: number | null
+          id?: string
+          note_date?: string
+          patient_id?: string
+          pe_group?: string
+          school_location?: string
+          school_name?: string
+          vaccinations?: string
+          weight_kg?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "school_notes_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "patients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           id: string

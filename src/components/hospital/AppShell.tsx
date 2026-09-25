@@ -3,7 +3,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 import {
   Database, FilePlus2, Folder, FolderOpen, HelpCircle, Info, LogOut, RefreshCw, Stethoscope,
-  UserCog, UserPlus, Users, CalendarDays, Clock,
+  UserCog, UserPlus, Users, CalendarDays, Clock, GraduationCap,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { meQuery } from "@/lib/db";
@@ -66,6 +66,7 @@ export function AppShell({ title, toolbar, children }: { title: string; toolbar?
                 <div className="pl-4">
                   <TreeLink to="/registry" icon={Users}>регистър</TreeLink>
                   <TreeLink to="/patients/new" icon={FilePlus2}>нов пациент</TreeLink>
+                  <TreeLink to="/school-notes" icon={GraduationCap}>ученически бележки</TreeLink>
                 </div>
               </div>
               <div className="tree-group"><Folder className="size-4 text-warning" /> администрация</div>

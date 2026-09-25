@@ -26,7 +26,7 @@ export interface DocSection {
 }
 
 export interface HospitalDocument {
-  kind: DocumentKind;
+  kind: DocumentKind | "school";
   title: string;
   subtitle: string;
   number: string;

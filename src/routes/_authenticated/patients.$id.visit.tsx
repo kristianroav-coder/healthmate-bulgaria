@@ -33,18 +33,18 @@ const DEPARTMENTS = [
 
 const schema = z.object({
   visit_date: z.string().min(10),
-  department: z.string().min(2).max(100),
-  doctor: z.string().trim().min(2).max(100),
+  department: z.string().min(2).max(300),
+  doctor: z.string().trim().min(2).max(300),
   weight_kg: z.number().min(0.5).max(400),
   height_cm: z.number().min(30).max(250),
   pulse: z.number().int().min(20).max(250),
   temperature: z.number().min(30).max(45),
   blood_pressure: z.string().trim().regex(/^\d{2,3}\/\d{2,3}$/, "RR във формат 120/80"),
-  complaints: z.string().trim().max(2000),
-  diagnosis: z.string().trim().min(2, "Въведете диагноза").max(300),
-  icd: z.string().trim().max(20),
-  notes: z.string().trim().max(2000),
-  final_notes: z.string().trim().max(3000),
+  complaints: z.string().trim().max(20000),
+  diagnosis: z.string().trim().min(2, "Въведете диагноза").max(5000),
+  icd: z.string().trim().max(500),
+  notes: z.string().trim().max(20000),
+  final_notes: z.string().trim().max(20000),
 });
 
 function VisitPage() {
