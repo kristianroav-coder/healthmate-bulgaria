@@ -2,6 +2,8 @@ import {
   Activity, CalendarDays, Cake, FileText, GraduationCap, HeartPulse, IdCard,
   MapPin, Phone, Ruler, ShieldCheck, ShieldAlert, Stethoscope, Weight,
 } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { ClipboardPlus } from "lucide-react";
 import { bmi, bmiLabel, formatDateBg, type Patient } from "@/lib/patients";
 import { DOCUMENT_LABELS, type DocumentKind } from "@/lib/documents";
 
@@ -69,6 +71,11 @@ export function PatientDetail({
             </div>
           </div>
           <div className="flex flex-wrap gap-2">
+            {patient.dbId && (
+              <Link to="/patients/$id/visit" params={{ id: patient.dbId }} className="win-btn-primary text-xs">
+                <ClipboardPlus className="size-3.5" /> Нов преглед
+              </Link>
+            )}
             {(Object.keys(DOCUMENT_LABELS) as DocumentKind[]).map((k) => (
               <button
                 key={k}
@@ -119,7 +126,9 @@ export function PatientDetail({
           <Row icon={CalendarDays} label="Дата" value={formatDateBg(v.date)} />
           <Row icon={Stethoscope} label="Отделение" value={v.department} />
           <Row icon={Stethoscope} label="Лекар" value={v.doctor} />
+          {v.complaints ? <Row icon={FileText} label="Оплаквания" value={v.complaints} /> : null}
           <Row icon={FileText} label="Диагноза" value={`${v.diagnosis} (МКБ ${v.icd})`} />
+          {v.finalNotes ? <Row icon={FileText} label="Заключение" value={v.finalNotes} /> : null}
         </div>
       </div>
 
@@ -141,8 +150,8 @@ export function PatientDetail({
               </tr>
             </thead>
             <tbody>
-              {patient.visits.map((x) => (
-                <tr key={x.date} className="border-t border-border/70">
+              {patient.visits.map((x, i) => (
+                <tr key={x.date + i} className="border-t border-border/70">
                   <td className="whitespace-nowrap px-4 py-2 tabular-nums">{formatDateBg(x.date)}</td>
                   <td className="px-4 py-2">{x.department}</td>
                   <td className="whitespace-nowrap px-4 py-2">{x.doctor}</td>

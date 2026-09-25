@@ -1,5 +1,5 @@
-import logoAsset from "@/assets/logo-nmtb-new.png.asset.json";
-const logo = logoAsset.url;
+import logoAsset from "@/assets/logo-mbal.png";
+const logo = logoAsset;
 import { HOSPITAL, type HospitalDocument } from "@/lib/documents";
 
 export function DocumentPage({ doc }: { doc: HospitalDocument }) {
