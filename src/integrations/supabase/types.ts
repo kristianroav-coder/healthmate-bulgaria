@@ -14,16 +14,206 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      patients: {
+        Row: {
+          address: string
+          allergies: string
+          birth_date: string
+          blood_type: string
+          city: string
+          code: string
+          created_at: string
+          egn: string
+          email: string
+          first_name: string
+          gp: string
+          grade: string | null
+          id: string
+          insured: boolean
+          insurer: string
+          is_student: boolean
+          last_name: string
+          middle_name: string
+          phone: string
+          school_location: string | null
+          school_name: string | null
+          sex: string
+        }
+        Insert: {
+          address?: string
+          allergies?: string
+          birth_date: string
+          blood_type?: string
+          city?: string
+          code?: string
+          created_at?: string
+          egn: string
+          email?: string
+          first_name: string
+          gp?: string
+          grade?: string | null
+          id?: string
+          insured?: boolean
+          insurer?: string
+          is_student?: boolean
+          last_name: string
+          middle_name?: string
+          phone?: string
+          school_location?: string | null
+          school_name?: string | null
+          sex?: string
+        }
+        Update: {
+          address?: string
+          allergies?: string
+          birth_date?: string
+          blood_type?: string
+          city?: string
+          code?: string
+          created_at?: string
+          egn?: string
+          email?: string
+          first_name?: string
+          gp?: string
+          grade?: string | null
+          id?: string
+          insured?: boolean
+          insurer?: string
+          is_student?: boolean
+          last_name?: string
+          middle_name?: string
+          phone?: string
+          school_location?: string | null
+          school_name?: string | null
+          sex?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          position: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string
+          full_name: string
+          id: string
+          position?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          position?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      visits: {
+        Row: {
+          blood_pressure: string
+          complaints: string
+          created_at: string
+          created_by: string | null
+          department: string
+          diagnosis: string
+          doctor: string
+          final_notes: string
+          height_cm: number
+          icd: string
+          id: string
+          notes: string
+          patient_id: string
+          pulse: number
+          temperature: number
+          visit_date: string
+          weight_kg: number
+        }
+        Insert: {
+          blood_pressure?: string
+          complaints?: string
+          created_at?: string
+          created_by?: string | null
+          department?: string
+          diagnosis?: string
+          doctor?: string
+          final_notes?: string
+          height_cm: number
+          icd?: string
+          id?: string
+          notes?: string
+          patient_id: string
+          pulse?: number
+          temperature?: number
+          visit_date?: string
+          weight_kg: number
+        }
+        Update: {
+          blood_pressure?: string
+          complaints?: string
+          created_at?: string
+          created_by?: string | null
+          department?: string
+          diagnosis?: string
+          doctor?: string
+          final_notes?: string
+          height_cm?: number
+          icd?: string
+          id?: string
+          notes?: string
+          patient_id?: string
+          pulse?: number
+          temperature?: number
+          visit_date?: string
+          weight_kg?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "visits_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "patients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "doctor" | "nurse" | "registrar"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +340,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "doctor", "nurse", "registrar"],
+    },
   },
 } as const
