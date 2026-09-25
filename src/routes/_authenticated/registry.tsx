@@ -69,7 +69,7 @@ function Registry() {
           <table className="grid-table">
             <thead>
               <tr>
-                <th /> <th>Код</th><th>Пациент</th><th>ЕГН</th><th>Възраст</th><th>Телефон</th><th>Град</th>
+                <th /><th>Код</th><th>Пациент</th><th>ЕГН</th><th>Възраст</th><th>Телефон</th><th>Град</th>
                 <th>Посл. посещение</th><th>Отделение</th><th className="text-right">Тегло</th><th className="text-right">Ръст</th><th>Учащ</th>
               </tr>
             </thead>
