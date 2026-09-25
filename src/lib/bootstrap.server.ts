@@ -1,8 +1,8 @@
-import { createServerFn } from "@tanstack/react-start";
+
 import { PATIENTS } from "./patients";
 
 // One-time setup: only runs while no administrator exists.
-export const bootstrapHospital = createServerFn({ method: "POST" }).handler(async () => {
+export async function bootstrapHospital() {
   const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
   const { count } = await supabaseAdmin
     .from("user_roles")
@@ -46,4 +46,4 @@ export const bootstrapHospital = createServerFn({ method: "POST" }).handler(asyn
     if (e2) throw new Error(e2.message);
   }
   return { ok: true };
-});
+}
