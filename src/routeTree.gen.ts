@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedDoctorRouteImport } from './routes/_authenticated/doctor'
 import { Route as AuthenticatedRegistryRouteImport } from './routes/_authenticated/registry'
 import { Route as AuthenticatedSchoolNotesRouteImport } from './routes/_authenticated/school-notes'
 import { Route as AuthenticatedStaffRouteImport } from './routes/_authenticated/staff'
@@ -31,6 +32,11 @@ const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedDoctorRoute = AuthenticatedDoctorRouteImport.update({
+  id: '/doctor',
+  path: '/doctor',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedRegistryRoute = AuthenticatedRegistryRouteImport.update({
   id: '/registry',
@@ -64,6 +70,7 @@ const AuthenticatedPatientsIdVisitRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/doctor': typeof AuthenticatedDoctorRoute
   '/registry': typeof AuthenticatedRegistryRoute
   '/school-notes': typeof AuthenticatedSchoolNotesRoute
   '/staff': typeof AuthenticatedStaffRoute
@@ -73,6 +80,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/doctor': typeof AuthenticatedDoctorRoute
   '/registry': typeof AuthenticatedRegistryRoute
   '/school-notes': typeof AuthenticatedSchoolNotesRoute
   '/staff': typeof AuthenticatedStaffRoute
@@ -84,6 +92,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/_authenticated/doctor': typeof AuthenticatedDoctorRoute
   '/_authenticated/registry': typeof AuthenticatedRegistryRoute
   '/_authenticated/school-notes': typeof AuthenticatedSchoolNotesRoute
   '/_authenticated/staff': typeof AuthenticatedStaffRoute
@@ -95,6 +104,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/doctor'
     | '/registry'
     | '/school-notes'
     | '/staff'
@@ -104,6 +114,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/doctor'
     | '/registry'
     | '/school-notes'
     | '/staff'
@@ -114,6 +125,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/_authenticated/doctor'
     | '/_authenticated/registry'
     | '/_authenticated/school-notes'
     | '/_authenticated/staff'
@@ -149,6 +161,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/doctor': {
+      id: '/_authenticated/doctor'
+      path: '/doctor'
+      fullPath: '/doctor'
+      preLoaderRoute: typeof AuthenticatedDoctorRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/registry': {
       id: '/_authenticated/registry'
@@ -189,6 +208,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedDoctorRoute: typeof AuthenticatedDoctorRoute
   AuthenticatedRegistryRoute: typeof AuthenticatedRegistryRoute
   AuthenticatedSchoolNotesRoute: typeof AuthenticatedSchoolNotesRoute
   AuthenticatedStaffRoute: typeof AuthenticatedStaffRoute
@@ -197,6 +217,7 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedDoctorRoute: AuthenticatedDoctorRoute,
   AuthenticatedRegistryRoute: AuthenticatedRegistryRoute,
   AuthenticatedSchoolNotesRoute: AuthenticatedSchoolNotesRoute,
   AuthenticatedStaffRoute: AuthenticatedStaffRoute,

@@ -14,6 +14,104 @@ export type Database = {
   }
   public: {
     Tables: {
+      clinical_record_versions: {
+        Row: {
+          changed_at: string
+          changed_by: string
+          id: string
+          reason: string
+          record_id: string
+          revision: number
+          snapshot: Json
+        }
+        Insert: {
+          changed_at?: string
+          changed_by: string
+          id?: string
+          reason?: string
+          record_id: string
+          revision: number
+          snapshot: Json
+        }
+        Update: {
+          changed_at?: string
+          changed_by?: string
+          id?: string
+          reason?: string
+          record_id?: string
+          revision?: number
+          snapshot?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "clinical_record_versions_record_id_fkey"
+            columns: ["record_id"]
+            isOneToOne: false
+            referencedRelation: "clinical_records"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      clinical_records: {
+        Row: {
+          created_at: string
+          data: Json
+          finalized_at: string | null
+          id: string
+          kind: string
+          owner_id: string
+          patient_id: string | null
+          related_id: string | null
+          revision: number
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          data?: Json
+          finalized_at?: string | null
+          id?: string
+          kind: string
+          owner_id: string
+          patient_id?: string | null
+          related_id?: string | null
+          revision?: number
+          status: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          data?: Json
+          finalized_at?: string | null
+          id?: string
+          kind?: string
+          owner_id?: string
+          patient_id?: string | null
+          related_id?: string | null
+          revision?: number
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "clinical_records_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "patients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "clinical_records_related_id_fkey"
+            columns: ["related_id"]
+            isOneToOne: false
+            referencedRelation: "clinical_records"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       patients: {
         Row: {
           address: string
