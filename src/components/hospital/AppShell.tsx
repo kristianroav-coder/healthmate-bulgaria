@@ -37,7 +37,7 @@ export function AppShell({ title, toolbar, children }: { title: string; toolbar?
     <div className="flex h-screen flex-col bg-[var(--word-canvas)] p-0 sm:p-3">
       <div className="win-window flex min-h-0 flex-1 flex-col">
         <div className="win-titlebar">
-          <img src={logo} alt="" className="h-5 w-auto rounded-sm bg-card p-px" />
+          <img src={logo} alt="" className="h-6 w-auto rounded-sm bg-card px-1" />
           <span className="truncate">МБАЛ – Балчик · Болнична информационна система — [{title}]</span>
         </div>
         <div className="win-menubar">
