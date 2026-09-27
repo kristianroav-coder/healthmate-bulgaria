@@ -46,7 +46,7 @@ export async function fetchPatients(): Promise<Patient[]> {
 
 export const patientsQuery = queryOptions({ queryKey: ["patients"], queryFn: fetchPatients });
 
-export type StaffProfile = { id: string; full_name: string; position: string; email: string; isAdmin: boolean };
+export type StaffProfile = { id: string; full_name: string; position: string; email: string; isDoctor: boolean; isAdmin: boolean };
 
 export async function fetchMe(): Promise<StaffProfile | null> {
   const { data: u } = await supabase.auth.getUser();
@@ -60,6 +60,7 @@ export async function fetchMe(): Promise<StaffProfile | null> {
     full_name: prof?.full_name ?? u.user.email ?? "",
     position: prof?.position ?? "",
     email: u.user.email ?? "",
+    isDoctor: (roles ?? []).some((r) => r.role === "doctor"),
     isAdmin: (roles ?? []).some((r) => r.role === "admin"),
   };
 }

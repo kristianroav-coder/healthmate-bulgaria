@@ -67,6 +67,7 @@ export function AppShell({ title, toolbar, children }: { title: string; toolbar?
                   <TreeLink to="/registry" icon={Users}>регистър</TreeLink>
                   <TreeLink to="/patients/new" icon={FilePlus2}>нов пациент</TreeLink>
                   <TreeLink to="/school-notes" icon={GraduationCap}>ученически бележки</TreeLink>
+                  <TreeLink to="/doctor" icon={Stethoscope}>лекарски кабинет</TreeLink>
                 </div>
               </div>
               <div className="tree-group"><Folder className="size-4 text-warning" /> администрация</div>
