@@ -13,9 +13,12 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedDoctorRouteImport } from './routes/_authenticated/doctor'
+import { Route as AuthenticatedHelpRouteImport } from './routes/_authenticated/help'
+import { Route as AuthenticatedModulesRouteImport } from './routes/_authenticated/modules'
 import { Route as AuthenticatedRegistryRouteImport } from './routes/_authenticated/registry'
 import { Route as AuthenticatedSchoolNotesRouteImport } from './routes/_authenticated/school-notes'
 import { Route as AuthenticatedStaffRouteImport } from './routes/_authenticated/staff'
+import { Route as AuthenticatedMModuleRouteImport } from './routes/_authenticated/m.$module'
 import { Route as AuthenticatedPatientsNewRouteImport } from './routes/_authenticated/patients.new'
 import { Route as AuthenticatedPatientsIdVisitRouteImport } from './routes/_authenticated/patients.$id.visit'
 
@@ -38,6 +41,16 @@ const AuthenticatedDoctorRoute = AuthenticatedDoctorRouteImport.update({
   path: '/doctor',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedHelpRoute = AuthenticatedHelpRouteImport.update({
+  id: '/help',
+  path: '/help',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedModulesRoute = AuthenticatedModulesRouteImport.update({
+  id: '/modules',
+  path: '/modules',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedRegistryRoute = AuthenticatedRegistryRouteImport.update({
   id: '/registry',
   path: '/registry',
@@ -52,6 +65,11 @@ const AuthenticatedSchoolNotesRoute =
 const AuthenticatedStaffRoute = AuthenticatedStaffRouteImport.update({
   id: '/staff',
   path: '/staff',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedMModuleRoute = AuthenticatedMModuleRouteImport.update({
+  id: '/m/$module',
+  path: '/m/$module',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedPatientsNewRoute =
@@ -71,9 +89,12 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/doctor': typeof AuthenticatedDoctorRoute
+  '/help': typeof AuthenticatedHelpRoute
+  '/modules': typeof AuthenticatedModulesRoute
   '/registry': typeof AuthenticatedRegistryRoute
   '/school-notes': typeof AuthenticatedSchoolNotesRoute
   '/staff': typeof AuthenticatedStaffRoute
+  '/m/$module': typeof AuthenticatedMModuleRoute
   '/patients/new': typeof AuthenticatedPatientsNewRoute
   '/patients/$id/visit': typeof AuthenticatedPatientsIdVisitRoute
 }
@@ -81,9 +102,12 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/doctor': typeof AuthenticatedDoctorRoute
+  '/help': typeof AuthenticatedHelpRoute
+  '/modules': typeof AuthenticatedModulesRoute
   '/registry': typeof AuthenticatedRegistryRoute
   '/school-notes': typeof AuthenticatedSchoolNotesRoute
   '/staff': typeof AuthenticatedStaffRoute
+  '/m/$module': typeof AuthenticatedMModuleRoute
   '/patients/new': typeof AuthenticatedPatientsNewRoute
   '/patients/$id/visit': typeof AuthenticatedPatientsIdVisitRoute
 }
@@ -93,9 +117,12 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/doctor': typeof AuthenticatedDoctorRoute
+  '/_authenticated/help': typeof AuthenticatedHelpRoute
+  '/_authenticated/modules': typeof AuthenticatedModulesRoute
   '/_authenticated/registry': typeof AuthenticatedRegistryRoute
   '/_authenticated/school-notes': typeof AuthenticatedSchoolNotesRoute
   '/_authenticated/staff': typeof AuthenticatedStaffRoute
+  '/_authenticated/m/$module': typeof AuthenticatedMModuleRoute
   '/_authenticated/patients/new': typeof AuthenticatedPatientsNewRoute
   '/_authenticated/patients/$id/visit': typeof AuthenticatedPatientsIdVisitRoute
 }
@@ -105,9 +132,12 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/doctor'
+    | '/help'
+    | '/modules'
     | '/registry'
     | '/school-notes'
     | '/staff'
+    | '/m/$module'
     | '/patients/new'
     | '/patients/$id/visit'
   fileRoutesByTo: FileRoutesByTo
@@ -115,9 +145,12 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/doctor'
+    | '/help'
+    | '/modules'
     | '/registry'
     | '/school-notes'
     | '/staff'
+    | '/m/$module'
     | '/patients/new'
     | '/patients/$id/visit'
   id:
@@ -126,9 +159,12 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/_authenticated/doctor'
+    | '/_authenticated/help'
+    | '/_authenticated/modules'
     | '/_authenticated/registry'
     | '/_authenticated/school-notes'
     | '/_authenticated/staff'
+    | '/_authenticated/m/$module'
     | '/_authenticated/patients/new'
     | '/_authenticated/patients/$id/visit'
   fileRoutesById: FileRoutesById
@@ -169,6 +205,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDoctorRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/help': {
+      id: '/_authenticated/help'
+      path: '/help'
+      fullPath: '/help'
+      preLoaderRoute: typeof AuthenticatedHelpRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/modules': {
+      id: '/_authenticated/modules'
+      path: '/modules'
+      fullPath: '/modules'
+      preLoaderRoute: typeof AuthenticatedModulesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/registry': {
       id: '/_authenticated/registry'
       path: '/registry'
@@ -190,6 +240,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedStaffRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/m/$module': {
+      id: '/_authenticated/m/$module'
+      path: '/m/$module'
+      fullPath: '/m/$module'
+      preLoaderRoute: typeof AuthenticatedMModuleRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/patients/new': {
       id: '/_authenticated/patients/new'
       path: '/patients/new'
@@ -209,18 +266,24 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDoctorRoute: typeof AuthenticatedDoctorRoute
+  AuthenticatedHelpRoute: typeof AuthenticatedHelpRoute
+  AuthenticatedModulesRoute: typeof AuthenticatedModulesRoute
   AuthenticatedRegistryRoute: typeof AuthenticatedRegistryRoute
   AuthenticatedSchoolNotesRoute: typeof AuthenticatedSchoolNotesRoute
   AuthenticatedStaffRoute: typeof AuthenticatedStaffRoute
+  AuthenticatedMModuleRoute: typeof AuthenticatedMModuleRoute
   AuthenticatedPatientsNewRoute: typeof AuthenticatedPatientsNewRoute
   AuthenticatedPatientsIdVisitRoute: typeof AuthenticatedPatientsIdVisitRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDoctorRoute: AuthenticatedDoctorRoute,
+  AuthenticatedHelpRoute: AuthenticatedHelpRoute,
+  AuthenticatedModulesRoute: AuthenticatedModulesRoute,
   AuthenticatedRegistryRoute: AuthenticatedRegistryRoute,
   AuthenticatedSchoolNotesRoute: AuthenticatedSchoolNotesRoute,
   AuthenticatedStaffRoute: AuthenticatedStaffRoute,
+  AuthenticatedMModuleRoute: AuthenticatedMModuleRoute,
   AuthenticatedPatientsNewRoute: AuthenticatedPatientsNewRoute,
   AuthenticatedPatientsIdVisitRoute: AuthenticatedPatientsIdVisitRoute,
 }
