@@ -58,10 +58,10 @@ export const MODULES: ModuleDef[] = [
       { name: "date", label: "Дата", type: "date" }, { name: "shift", label: "Смяна", type: "select", options: ["Дневна 08–20", "Нощна 20–08", "Дежурство 24ч"] },
       { name: "ward", label: "Отделение", type: "select", options: WARDS }] },
 
-  { key: "lab", group: "Параклиника и лаборатории", title: "Клинична лаборатория", description: "Заявки и резултати.", titleField: "test", statuses: LAB_ST, fields: labFields(LABS[0]) },
-  { key: "micro", group: "Параклиника и лаборатории", title: "Микробиология", description: "Посявки и антибиограми.", titleField: "test", statuses: LAB_ST, fields: labFields(LABS[1]) },
-  { key: "patho", group: "Параклиника и лаборатории", title: "Патоанатомия", description: "Хистология и цитология.", titleField: "test", statuses: LAB_ST, fields: labFields(LABS[2]) },
-  { key: "imaging", group: "Параклиника и лаборатории", title: "Образна диагностика (PACS)", description: "Рентген, КТ, ЯМР, ехография.", titleField: "test", statuses: LAB_ST, fields: labFields(LABS[3]) },
+  { key: "lab", group: "Параклиника и лаборатории", title: "Клинична лаборатория", description: "Заявки и резултати.", titleField: "test", statuses: LAB_ST, fields: labFields(LABS[0]!) },
+  { key: "micro", group: "Параклиника и лаборатории", title: "Микробиология", description: "Посявки и антибиограми.", titleField: "test", statuses: LAB_ST, fields: labFields(LABS[1]!) },
+  { key: "patho", group: "Параклиника и лаборатории", title: "Патоанатомия", description: "Хистология и цитология.", titleField: "test", statuses: LAB_ST, fields: labFields(LABS[2]!) },
+  { key: "imaging", group: "Параклиника и лаборатории", title: "Образна диагностика (PACS)", description: "Рентген, КТ, ЯМР, ехография.", titleField: "test", statuses: LAB_ST, fields: labFields(LABS[3]!) },
 
   { key: "stock", group: "Аптека и склад", title: "Наличности", description: "Лекарства, консумативи и медицински изделия.", titleField: "item",
     statuses: ["Налично", "Под минимум", "Изчерпано", "Изтекъл срок"],

@@ -34,12 +34,12 @@ function ModulePage() {
   const [q, setQ] = useState("");
   const [editing, setEditing] = useState<ModuleRecord | null>(null);
   const [form, setForm] = useState<Record<string, string>>({});
-  const [status, setStatus] = useState(def.statuses[0]);
+  const [status, setStatus] = useState(def.statuses[0]!);
   const [patientId, setPatientId] = useState<string>("");
   const [busy, setBusy] = useState(false);
   const [lastKey, setLastKey] = useState(module);
 
-  if (lastKey !== module) { setLastKey(module); setEditing(null); setForm({}); setStatus(def.statuses[0]); setPatientId(""); }
+  if (lastKey !== module) { setLastKey(module); setEditing(null); setForm({}); setStatus(def.statuses[0]!); setPatientId(""); }
 
   const pName = (id: string | null) => patients.find((p) => p.dbId === id)?.fullName ?? "";
   const cols = def.fields.slice(0, 5);
@@ -49,13 +49,13 @@ function ModulePage() {
     return rows.filter((r) => [r.status, pName(r.patient_id), ...Object.values(r.data)].join(" ").toLowerCase().includes(s));
   }, [rows, q, patients]);
 
-  function startNew() { setEditing(null); setForm({}); setStatus(def.statuses[0]); setPatientId(""); }
+  function startNew() { setEditing(null); setForm({}); setStatus(def.statuses[0]!); setPatientId(""); }
   function edit(r: ModuleRecord) { setEditing(r); setForm(r.data); setStatus(r.status); setPatientId(r.patient_id ?? ""); }
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     const miss = def.fields.find((f) => f.required && !form[f.name]?.trim());
-    if (miss) return toast.error(`Попълнете „${miss.label}“.`);
+    if (miss) { toast.error(`Попълнете „${miss.label}“.`); return; }
     setBusy(true);
     try {
       await saveRecord(def, editing?.id ?? null, status, patientId || null, form);
@@ -72,7 +72,7 @@ function ModulePage() {
   }
 
   const total = def.fields.some((f) => ["amount", "price"].includes(f.name))
-    ? filtered.reduce((s, r) => s + (Number(r.data.amount ?? r.data.price) || 0), 0) : null;
+    ? filtered.reduce((s, r) => s + (Number(r.data["amount"] ?? r.data["price"]) || 0), 0) : null;
 
   const toolbar = (
     <>
