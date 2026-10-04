@@ -16,14 +16,14 @@ function ModulesPage() {
   const { data: patients = [] } = useQuery(patientsQuery);
   const count = (k: string) => rows.filter((r) => r.module === k).length;
   const sum = (k: string, st?: string) => rows.filter((r) => r.module === k && (!st || r.status === st))
-    .reduce((s, r) => s + (Number(r.data.amount ?? r.data.price) || 0), 0);
+    .reduce((s, r) => s + (Number(r.data["amount"] ?? r.data["price"]) || 0), 0);
   const busyBeds = rows.filter((r) => r.module === "beds" && r.status === "Заето").length;
   const stats = [
     ["Пациенти", patients.length], ["Заети легла", `${busyBeds} / ${count("beds")}`],
     ["Активни хоспитализации", rows.filter((r) => r.module === "hospitalizations" && r.status === "Активна").length],
     ["Чакащи изследвания", rows.filter((r) => ["lab", "micro", "patho", "imaging"].includes(r.module) && r.status !== "Готово").length],
     ["Фактурирано", `${sum("invoices").toFixed(2)} лв.`], ["Неплатени фактури", `${sum("invoices", "Неплатена").toFixed(2)} лв.`],
-    ["Каса приход", `${rows.filter((r) => r.module === "cashbox" && r.data.type === "Приход").reduce((s, r) => s + (Number(r.data.amount) || 0), 0).toFixed(2)} лв.`],
+    ["Каса приход", `${rows.filter((r) => r.module === "cashbox" && r.data["type"] === "Приход").reduce((s, r) => s + (Number(r.data["amount"]) || 0), 0).toFixed(2)} лв.`],
     ["Платен прием", `${sum("paid", "Платено").toFixed(2)} лв.`],
   ];
   return (
